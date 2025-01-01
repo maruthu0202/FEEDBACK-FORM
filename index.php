@@ -1,26 +1,23 @@
 <?php
-// Include the database connection
 $servername = "localhost";
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "feed"; // Replace with your database name
+$username = "root"; 
+$password = ""; 
+$dbname = "feed"; 
 
-// Create connection
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
+    
     $name = $conn->real_escape_string($_POST['name']);
     $phone = $conn->real_escape_string($_POST['phone']);
     $feedback = $conn->real_escape_string($_POST['feedback']);
 
-    // SQL query to insert data into feedback table
+    
     $sql = "INSERT INTO feedback (name, phone, feedback) VALUES ('$name', '$phone', '$feedback')";
 
     if ($conn->query($sql) === TRUE) {
@@ -30,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>
 
